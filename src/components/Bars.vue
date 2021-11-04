@@ -54,8 +54,8 @@ export default {
     drawer: true,
     group: null,
     routes: [
-      { path: "food", name: "Foods", icon: "mdi-food" },
       { path: "drink", name: "Drinks", icon: "mdi-glass-mug" },
+      { path: "food", name: "Foods", icon: "mdi-food" },
     ],
   }),
 };
