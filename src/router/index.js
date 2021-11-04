@@ -10,19 +10,19 @@ const routes = [
     component: Vue.component("page-not-found", {
       template: "",
       created: function() {
-        window.location.href = "/food";
+        window.location.href = "/drink";
       },
     }),
-  },
-  {
-    path: "/food",
-    name: "Food",
-    component: () => import("../views/Food.vue"),
   },
   {
     path: "/drink",
     name: "Drink",
     component: () => import("../views/Drinks.vue"),
+  },
+  {
+   path: "/food",
+   name: "Food",
+   component: () => import("../views/Food.vue"),
   },
 ];
 
