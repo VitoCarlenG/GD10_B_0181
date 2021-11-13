@@ -110,6 +110,7 @@
 
 <script>
 //tambahkan ini untuk import database reference
+import { drinkRef } from "../firebase";
 
 export default {
   data: () => ({
@@ -149,6 +150,9 @@ export default {
   }),
 
   //tambahkan attribute firebase disini
+  firebase: {
+    drinks: drinkRef,
+  },
 
   computed: {
     formTitle() {
@@ -179,7 +183,17 @@ export default {
     },
 
     //tambahkan ini untuk delete data
-    deleteItemConfirm() {},
+    deleteItemConfirm() {
+      //tambahkan ini untuk delete data
+      drinkRef
+        .child(this.editedIndex)
+        .remove()
+        .then(() => {
+          alert("Berhasil Hapus Data !");
+        })
+        .catch((err) => [alert("Gagal Hapus Data: ", err)]);
+      this.closeDelete();
+    },
 
     close() {
       this.dialog = false;
@@ -198,7 +212,27 @@ export default {
     },
 
     // Tambahkan code method save
-    save() {},
+    save() {
+      if (this.editedIndex != -1) {
+        //tambahkan ini untuk edit data
+        drinkRef
+          .child(this.editedIndex)
+          .set(this.editedItem)
+          .then(() => {
+            alert("Berhasil Edit Data !");
+          })
+          .catch((err) => [alert("Gagal Edit Data: ", err)]);
+      } else {
+        //tambahkan code ini untuk create data ke db
+        drinkRef
+          .push(this.editedItem)
+          .then(() => {
+            alert("Berhasil Tambah Data !");
+          })
+          .catch((err) => [alert("Gagal Tambah Data: ", err)]);
+      }
+      this.close();
+    },
   },
 };
 </script>
